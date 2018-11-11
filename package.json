@@ -1,0 +1,22 @@
+{
+  "name": "breadbot",
+  "version": "1.0.0",
+  "description": "Slack bot that assists with acquiring that bread",
+  "main": "index.js",
+  "scripts": {
+    "start": "tsc & node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tauster/breadbot.git"
+  },
+  "author": "Tausif Sharif",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tauster/breadbot/issues"
+  },
+  "homepage": "https://github.com/tauster/breadbot#readme",
+  "dependencies": {
+    "slackbots": "^1.2.0"
+  }
+}
