@@ -1,6 +1,6 @@
 // Import project breadbot
 import {Config} from "./Config";
-import {HandleReceivedMsg, IResponseToMsg} from "./HandleReceivedMsg";
+import {HandleReceivedMsg, IResponseToMsg, EResponseAction} from "./HandleReceivedMsg";
 
 // Import slackbots. No current ts typings
 // @ts-ignore
@@ -14,17 +14,14 @@ const breadbot = new SlackBot({
 
 // Start Handler, starting bot sequence
 breadbot.on("start", (): void => {
-    const params: any = {
-        icon_emoji: ":bread:"
-    };
-
-    // breadbot.postMessageToChannel('')
+    console.log("breadbot is getting this bread");
 });
 
 /**
  * Error Handler
  */
 breadbot.on("error", (err: any): void => {
+    console.log("breadbot caught an L and couldn't get this bread");
     console.log(err);
 });
 
@@ -32,16 +29,42 @@ breadbot.on("error", (err: any): void => {
  * Message Handler
  */
 breadbot.on("message", (data: any): void => {
-    if (data.type !== "message") {
-        return;
-    }
-
-    console.log(data);
-    let userResponse: IResponseToMsg = HandleReceivedMsg.handleMsg(data);
-
     const params: any = {
         icon_emoji: ":bread:"
     };
-    console.log(userResponse);
 
+    if (data.type !== "message") {
+        return;
+    }
+    else if (data.username! == "breadbot") {
+        return;
+    }
+
+    else {
+        let messageResponse: IResponseToMsg = HandleReceivedMsg.handleMsg(data);
+
+        if (messageResponse.action == EResponseAction.Send) {
+            let isChannel: boolean = false;
+            let channelName: string = "";
+
+            breadbot.getChannelById(data.channel).then((channelInfo: any): void => {
+                isChannel = true;
+                channelName = channelInfo.name;
+            });
+            
+            if (isChannel == false) {
+                breadbot.getUserById(data.user).then((userInfo: any): void => {    
+                    breadbot.postMessageToUser(userInfo.name, messageResponse.response!.replace("<REPLACE_USER_ID>", `<@${userInfo.id}>`), params); 
+                });
+            }
+            else {
+                breadbot.getUserById(data.user).then((userInfo: any): void => {    
+                    breadbot.postMessageToChannel(channelName, messageResponse.response!.replace("<REPLACE_USER_ID>", `<@${userInfo.id}>`), params); 
+                });
+            }
+            // breadbot.getUserById(data.user).then((userInfo: any): void => {    
+            //     breadbot.postMessageToUser(userInfo.name, messageResponse.response!.replace("<REPLACE_USER_ID>", `<@${userInfo.id}>`), params); 
+            // });
+        }
+    }
 });

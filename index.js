@@ -13,28 +13,50 @@ var breadbot = new SlackBot({
 });
 // Start Handler, starting bot sequence
 breadbot.on("start", function () {
-    var params = {
-        icon_emoji: ":bread:"
-    };
-    // breadbot.postMessageToChannel('')
+    console.log("breadbot is getting this bread");
 });
 /**
  * Error Handler
  */
 breadbot.on("error", function (err) {
+    console.log("breadbot caught an L and couldn't get this bread");
     console.log(err);
 });
 /**
  * Message Handler
  */
 breadbot.on("message", function (data) {
-    if (data.type !== "message") {
-        return;
-    }
-    console.log(data);
-    var userResponse = HandleReceivedMsg_1.HandleReceivedMsg.handleMsg(data);
     var params = {
         icon_emoji: ":bread:"
     };
-    console.log(userResponse);
+    if (data.type !== "message") {
+        return;
+    }
+    else if (data.username == "breadbot") {
+        return;
+    }
+    else {
+        var messageResponse_1 = HandleReceivedMsg_1.HandleReceivedMsg.handleMsg(data);
+        if (messageResponse_1.action == HandleReceivedMsg_1.EResponseAction.Send) {
+            var isChannel_1 = false;
+            var channelName_1 = "";
+            breadbot.getChannelById(data.channel).then(function (channelInfo) {
+                isChannel_1 = true;
+                channelName_1 = channelInfo.name;
+            });
+            if (isChannel_1 == false) {
+                breadbot.getUserById(data.user).then(function (userInfo) {
+                    breadbot.postMessageToUser(userInfo.name, messageResponse_1.response.replace("<REPLACE_USER_ID>", "<@" + userInfo.id + ">"), params);
+                });
+            }
+            else {
+                breadbot.getUserById(data.user).then(function (userInfo) {
+                    breadbot.postMessageToChannel(channelName_1, messageResponse_1.response.replace("<REPLACE_USER_ID>", "<@" + userInfo.id + ">"), params);
+                });
+            }
+            // breadbot.getUserById(data.user).then((userInfo: any): void => {    
+            //     breadbot.postMessageToUser(userInfo.name, messageResponse.response!.replace("<REPLACE_USER_ID>", `<@${userInfo.id}>`), params); 
+            // });
+        }
+    }
 });
