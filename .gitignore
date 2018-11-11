@@ -22,3 +22,6 @@ yarn-error.log*
 
 # config files
 Config.*
+
+# config js template
+Config-template.js
