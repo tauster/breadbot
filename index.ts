@@ -103,3 +103,22 @@ breadbot.on("message", (data: any): void => {
     }
 });
 
+/**
+ * Setting up defualt web server to keep server alive
+ */
+const express = require("express");
+const path = require("path");
+const app = express();
+
+let port = process.env.PORT || 8080;
+
+app.use(express.static(__dirname));
+
+app.get("/", (req: any, res: any) => {
+    res.send("Let's get this bread");
+});
+
+app.listen(port, (): void => {
+    console.log("breadbot server started on port " + port);
+});
+

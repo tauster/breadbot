@@ -94,3 +94,17 @@ breadbot.on("message", function (data) {
         }
     }
 });
+/**
+ * Setting up defualt web server to keep server alive
+ */
+var express = require("express");
+var path = require("path");
+var app = express();
+var port = process.env.PORT || 8080;
+app.use(express.static(__dirname));
+app.get("/", function (req, res) {
+    res.send("Let's get this bread");
+});
+app.listen(port, function () {
+    console.log("breadbot server started on port " + port);
+});
