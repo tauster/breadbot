@@ -115,7 +115,10 @@ let port = process.env.PORT || 8080;
 app.use(express.static(__dirname));
 
 app.get("/", (req: any, res: any) => {
-    res.send("Let's get this bread");
+    res.send(
+        "Let's get this bread." + "</br></br>" + 
+        "<a href='https://github.com/tauster/breadbot'>https://github.com/tauster/breadbot</a>" + "</br>" + 
+        "<a href='https://digitalpyramids.co/'>https://digitalpyramids.co/</a>");
 });
 
 app.listen(port, (): void => {
