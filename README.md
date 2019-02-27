@@ -2,6 +2,7 @@
 #### _Slack bot that assists with acquiring that bread_ 🍞
 
 ![](https://media.giphy.com/media/fdPqVvGfl4IAM8fwt5/giphy.gif)
+_breadbot recognizes much more!_
 
 ## Running Locally
 * Clone repo
