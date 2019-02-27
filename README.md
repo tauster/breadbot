@@ -1,6 +1,8 @@
 # breadbot
 #### _Slack bot that assists with acquiring that bread_ 🍞
 
+![](https://media.giphy.com/media/fdPqVvGfl4IAM8fwt5/giphy.gif)
+
 ## Running Locally
 * Clone repo
 * Run ``npm install``
