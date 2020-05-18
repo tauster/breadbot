@@ -8,7 +8,7 @@
 
 import * as _ from "lodash";
 import {Config} from "./Config";
-import {HandleReceivedMsg, IResponseToMsg, EResponseAction} from "./HandleReceivedMsg";
+import {HandleReceivedMsg, IResponseToMsg, EResponseAction} from "./libs/HandleReceivedMsg";
 
 // Import slackbots. No current ts typings
 // @ts-ignore

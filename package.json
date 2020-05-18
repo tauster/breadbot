@@ -4,8 +4,8 @@
   "description": "Slack bot that assists with acquiring that bread",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "development": "tsc & node index.js"
+    "start": "node dist/index.js",
+    "build": "tsc"
   },
   "repository": {
     "type": "git",
