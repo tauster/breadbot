@@ -1,5 +1,5 @@
 # breadbot
-#### _Slack bot that assists with acquiring that bread_ 🍞
+#### _A Slack bot that assists with acquiring that bread_ 🍞
 
 ![](breadbot-gif.gif)
 
