@@ -1,7 +1,7 @@
 # breadbot
 #### _Slack bot that assists with acquiring that bread_ 🍞
 
-![](breadbot-git.gif)
+![](breadbot-gif.gif)
 
 _breadbot recognizes much more!_
 
