@@ -21,7 +21,7 @@
     "@types/express": "^4.16.0",
     "@types/lodash": "^4.14.118",
     "express": "^4.16.4",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.13",
     "slackbots": "^1.2.0"
   }
 }
